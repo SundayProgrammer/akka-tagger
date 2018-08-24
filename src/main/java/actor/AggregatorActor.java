@@ -23,6 +23,7 @@ public class AggregatorActor extends AbstractActor {
 
     public AggregatorActor(ArrayList<Rule> rules) {
         this.rules = rules;
+        this.filteredCategories = new LinkedList<String>();
     }
 
     static public class Words {
@@ -46,6 +47,7 @@ public class AggregatorActor extends AbstractActor {
         return receiveBuilder()
                 .match(Words.class, x -> {
                     List<Rule> matchedRules = new LinkedList<>();
+                    this.filteredCategories.clear();
                     for (Rule rule: this.rules) {
                         int count = rule.requiredWords.length;
                         for (String word: rule.requiredWords) {
@@ -87,6 +89,8 @@ public class AggregatorActor extends AbstractActor {
                     for (Rule rule: matchedRules) {
                         this.filteredCategories.add(rule.category);
                     }
+                    log.info(String.join(" ", this.filteredCategories));
+
                 })
                 .match(MatchedCategories.class, x -> {
                     log.info("Request: " + x.message);

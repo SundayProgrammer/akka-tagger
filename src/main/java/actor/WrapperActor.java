@@ -11,7 +11,7 @@ import java.util.List;
 
 public class WrapperActor extends AbstractActor {
 
-    static public Props props(final ActorRef aggregatorActor) {
+    static public Props props(ActorRef aggregatorActor) {
         return Props.create(WrapperActor.class, () -> new WrapperActor(aggregatorActor));
     }
 
@@ -38,7 +38,7 @@ public class WrapperActor extends AbstractActor {
     public Receive createReceive() {
         return receiveBuilder()
                 .match(ExtractWords.class, x -> {
-                    extractedWords = Arrays.asList(x.message.split(" "));
+                    this.extractedWords = Arrays.asList(x.message.split(" "));
                 })
                 .match(Resolve.class, x -> {
                     aggregatorActor.tell(new Words(extractedWords), getSelf());

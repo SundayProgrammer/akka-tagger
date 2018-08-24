@@ -22,8 +22,8 @@ public class Categorization {
     public void readRules(String path) throws FileNotFoundException {
         Gson gson = new Gson();
         JsonReader reader = new JsonReader(new FileReader(path));
-        Rule[] rulesArray = gson.fromJson(reader, Rule.class);
-        this.rules = (ArrayList<Rule>) Arrays.asList(rulesArray);
+        Rule[] rulesArray = gson.fromJson(reader, Rule[].class);
+        this.rules = new ArrayList<Rule>(Arrays.asList(rulesArray));
     }
 }
 
