@@ -1,0 +1,24 @@
+{
+    "rulesArray": [
+        {
+            "requiredWords": ["rybe", "dorszcz"],
+            "bannedWords": ["restauracja"],
+            "category": "gotowanie"
+        },
+        {
+            "requiredWords": ["piwo", "rzemieslnicze"],
+            "bannedWords": ["sklep"],
+            "category": "pub"
+        },
+        {
+            "requiredWords": ["kanapka", "szybko"],
+            "bannedWords": ["dom"],
+            "category": "fastfood"
+        },
+        {
+            "requiredWords": ["krem", "slonce"],
+            "bannedWords": ["plaza"],
+            "category": "drogeria"
+        }
+    ]
+}

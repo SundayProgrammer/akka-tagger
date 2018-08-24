@@ -11,21 +11,23 @@ import java.util.List;
 
 public class WrapperActor extends AbstractActor {
 
-    static public Props props(final String message, final ActorRef aggregatorActor) {
-        return Props.create(WrapperActor.class, () -> new WrapperActor(message, aggregatorActor));
+    static public Props props(final ActorRef aggregatorActor) {
+        return Props.create(WrapperActor.class, () -> new WrapperActor(aggregatorActor));
     }
 
     private final ActorRef aggregatorActor;
-    private final String message;
     private List<String> extractedWords;
 
-    public WrapperActor(String message, ActorRef aggregatorActor) {
-        this.message = message;
+    public WrapperActor(ActorRef aggregatorActor) {
         this.aggregatorActor = aggregatorActor;
     }
 
     static public class ExtractWords {
-        public ExtractWords() {}
+        private final String message;
+
+        public ExtractWords(String message) {
+            this.message = message;
+        }
     }
 
     static public class Resolve {
@@ -36,7 +38,7 @@ public class WrapperActor extends AbstractActor {
     public Receive createReceive() {
         return receiveBuilder()
                 .match(ExtractWords.class, x -> {
-                    extractedWords = Arrays.asList(this.message.split(" "));
+                    extractedWords = Arrays.asList(x.message.split(" "));
                 })
                 .match(Resolve.class, x -> {
                     aggregatorActor.tell(new Words(extractedWords), getSelf());
