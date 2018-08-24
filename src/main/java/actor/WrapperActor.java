@@ -17,7 +17,7 @@ public class WrapperActor extends AbstractActor {
 
     private final ActorRef aggregatorActor;
     private final String message;
-    private List extractedWords;
+    private List<String> extractedWords;
 
     public WrapperActor(String message, ActorRef aggregatorActor) {
         this.message = message;
