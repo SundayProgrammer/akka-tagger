@@ -5,6 +5,7 @@ import akka.actor.ActorSystem;
 import helpers.Categorization;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -14,6 +15,12 @@ public class Main {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         Categorization categorization = new Categorization();
+        try {
+            categorization.readRules("../data/rules.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("Rules not found");
+            return;
+        }
         Boolean order = true;
 
         final ActorRef aggregatorActor =
@@ -37,8 +44,9 @@ public class Main {
             switch (input) {
                 case "c":
                     break;
+                case "q":
                 default:
-                    return;
+                    System.out.println("Wrong input");
             }
         }
     }
