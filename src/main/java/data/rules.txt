@@ -10,13 +10,23 @@
         "category": "pub"
     },
     {
-        "requiredWords": ["kanapka", "szybko"],
-        "bannedWords": ["dom"],
+        "requiredWords": ["pizza", "szybko"],
+        "bannedWords": ["dom", "skladniki"],
         "category": "fastfood"
     },
     {
-        "requiredWords": ["krem", "slonce"],
+        "requiredWords": ["krem", "sloncu"],
         "bannedWords": ["plaza"],
         "category": "drogeria"
+    },
+    {
+        "requiredWords": ["polacz", "galaz"],
+        "bannedWords": ["drzewo"],
+        "category": "git"
+    },
+    {
+        "requiredWords": ["strzal", "celny"],
+        "bannedWords": ["pilka"],
+        "category": "strzelnica"
     }
 ]
