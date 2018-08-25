@@ -62,11 +62,12 @@ public class Main {
             int aviableSentences = sentences.size();
             int random = 0;
 
-            for (int i = num; i > 0; i--) {
+            
+            /*for (int i = num; i > 0; i--) {
                 random = ThreadLocalRandom.current().nextInt(0, aviableSentences);
                 wrapperActor.tell(new ExtractWords(sentences.get(random)), ActorRef.noSender());
                 wrapperActor.tell(new Resolve(), ActorRef.noSender());
-            }
+            }*/
         }
     }
 }
