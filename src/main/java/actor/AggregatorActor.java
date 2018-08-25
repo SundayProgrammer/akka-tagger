@@ -18,7 +18,7 @@ public class AggregatorActor extends AbstractActor {
     }
 
     private LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
-    private final ArrayList<Rule> rules;
+    private ArrayList<Rule> rules;
     private LinkedList<String> filteredCategories;
 
     public AggregatorActor(ArrayList<Rule> rules) {
@@ -48,10 +48,10 @@ public class AggregatorActor extends AbstractActor {
                 .match(Words.class, x -> {
                     List<Rule> matchedRules = new LinkedList<>();
                     this.filteredCategories.clear();
-                    for (Rule rule: this.rules) {
+                    for (Rule rule : this.rules) {
                         int count = rule.requiredWords.length;
-                        for (String word: rule.requiredWords) {
-                            for (String extractedWord: x.extractedWords) {
+                        for (String word : rule.requiredWords) {
+                            for (String extractedWord : x.extractedWords) {
                                 if (extractedWord.equals(word)) {
                                     count--;
                                     break;
@@ -66,12 +66,12 @@ public class AggregatorActor extends AbstractActor {
                     }
                     if (matchedRules.size() > 0) {
                         Iterator<Rule> it = matchedRules.iterator();
-                        while(it.hasNext()) {
+                        while (it.hasNext()) {
                             Rule rule = it.next();
                             Boolean matched = false;
-                            for (String word: rule.bannedWords) {
+                            for (String word : rule.bannedWords) {
                                 matched = false;
-                                for (String extractedWord: x.extractedWords) {
+                                for (String extractedWord : x.extractedWords) {
                                     if (extractedWord.equals(word)) {
                                         matched = true;
                                         break;
@@ -86,7 +86,7 @@ public class AggregatorActor extends AbstractActor {
                             }
                         }
                     }
-                    for (Rule rule: matchedRules) {
+                    for (Rule rule : matchedRules) {
                         this.filteredCategories.add(rule.category);
                     }
                     log.info(String.join(" ", this.filteredCategories));
